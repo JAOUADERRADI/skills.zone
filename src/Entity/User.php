@@ -45,6 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Enrollment::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $enrollments;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?InfoUser $infoUser = null;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
@@ -182,6 +185,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $enrollment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInfoUser(): ?InfoUser
+    {
+        return $this->infoUser;
+    }
+
+    public function setInfoUser(InfoUser $infoUser): static
+    {
+        // set the owning side of the relation if necessary
+        if ($infoUser->getUser() !== $this) {
+            $infoUser->setUser($this);
+        }
+
+        $this->infoUser = $infoUser;
 
         return $this;
     }
