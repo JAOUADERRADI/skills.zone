@@ -56,11 +56,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $posts;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
         $this->enrollments = new ArrayCollection();
         $this->posts = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();  // Initialise createdAt à la date actuelle
     }
 
     public function getId(): ?int
@@ -241,6 +245,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $post->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
