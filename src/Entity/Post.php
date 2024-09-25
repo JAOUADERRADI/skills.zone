@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
+use App\Enum\PostStatus;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
@@ -39,6 +40,9 @@ class Post
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?PostCategory $category = null;
+
+    #[ORM\Column(type: 'string', enumType: PostStatus::class)]
+    private PostStatus $status = PostStatus::Draft;
 
     public function getId(): ?int
     {
@@ -137,6 +141,17 @@ class Post
     public function setCategory(?PostCategory $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getStatus(): PostStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(PostStatus $status): self {
+        $this->status = $status;
 
         return $this;
     }
