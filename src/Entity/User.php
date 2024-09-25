@@ -64,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->courses = new ArrayCollection();
         $this->enrollments = new ArrayCollection();
         $this->posts = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();  // Initialise createdAt à la date actuelle
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
