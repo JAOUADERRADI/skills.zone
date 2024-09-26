@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container-form">
+        <div class="form-wrapper">
+            <h1 class="form-wrapper__title">Please sign in</h1>
+            <form method="post">
+                <!-- Display error message if login fails -->
+                {% if error %}
+                    <div class="form-wrapper__error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <!-- Display message if user is already logged in -->
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <!-- Email Field -->
+                <div class="form-group form-group--email">
+                    <label class="form-group__label" for="inputEmail">Email <span class="required">*</span></label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-group__input" autocomplete="email" required autofocus>
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group form-group--password">
+                    <label class="form-group__label" for="inputPassword">Password <span class="required">*</span></label>
+                    <input type="password" name="password" id="inputPassword" class="form-group__input" autocomplete="current-password" required>
+                </div>
+
+                <!-- Remember Me Checkbox -->
+                <div class="form-group form-group--agree-terms">
+                    <div class="form-group__checkbox">
+                        <input type="checkbox" name="_remember_me" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                </div>
+
+                <!-- CSRF Token -->
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <!-- Submit Button -->
+                <div class="form-group form-group--submit">
+                    <button type="submit" class="button button--primary">Sign in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
