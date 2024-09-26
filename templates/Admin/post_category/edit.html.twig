@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Edit PostCategory{% endblock %}
-
+{% block title %}
+    Edit PostCategory
+{% endblock %}
 {% block body %}
-    <h1>Edit PostCategory</h1>
-
-    {{ include('Admin/post_category/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_post_category_index') }}">back to list</a>
-
-    {{ include('Admin/post_category/_delete_form.html.twig') }}
+    <div class="max-w-4xl mx-auto mt-24 p-6 bg-primary-light_white rounded-lg shadow-lg text-primary-dark">
+        <h1 class="text-3xl font-bold mb-6 text-center">
+            Edit Post Category
+        </h1>
+        <!-- Form include with TailwindCSS styles -->
+        <div class="mb-6">
+            {{ include('Admin/post_category/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+        <!-- Back to list button -->
+        <div class="flex justify-between mb-4">
+            <a href="{{ path('app_post_category_index') }}" class="text-primary-blue">
+                Back to list
+            </a>
+            {{ include('Admin/post_category/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
