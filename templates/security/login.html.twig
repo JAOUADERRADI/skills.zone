@@ -12,13 +12,6 @@
                     <div class="form-wrapper__error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
 
-                <!-- Display message if user is already logged in -->
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% endif %}
-
                 <!-- Email Field -->
                 <div class="form-group form-group--email">
                     <label class="form-group__label" for="inputEmail">Email <span class="required">*</span></label>

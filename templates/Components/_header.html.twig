@@ -1,0 +1,107 @@
+<header class="header">
+    <div
+        class="header__container">
+        <!-- Logo -->
+        <div class="header__logo">
+            <a href="{{ path("app_home") }}">
+                SkillsZone
+            </a>
+        </div>
+        <!-- Navigation Links -->
+        <nav class="header__nav">
+            {% if is_granted('ROLE_ADMIN') and app.request.attributes.get('_route') == 'app_admin' %}
+                <a href="{{ path('app_admin') }}">
+                    Dashboard Admin
+                </a>
+                <a href="#">
+                    Manage Courses
+                </a>
+                <a href="#">
+                    Manage Resources
+                </a>
+                <a href="{{ path('app_home') }}">
+                    SkillZone Home
+                </a>
+            {% else %}
+                <a href="{{ path('app_home') }}">
+                    Home
+                </a>
+                <a href="#">
+                    Courses
+                </a>
+                <a href="#">
+                    Resources
+                </a>
+            {% endif %}
+        </nav>
+        <!-- Profile Icon -->
+        <div class="header__profile" id="profile-menu-button">
+            <i class="fas fa-user"></i>
+        </div>
+        <!-- Dropdown Menu -->
+        <div class="header__dropdown" id="profile-dropdown">
+            {% if app.user %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_admin') }}">
+                        Dashboard Admin
+                    </a>
+                {% endif %}
+                <a href="{{ path('app_logout') }}">
+                    Logout
+                </a>
+            {% else %}
+                <a href="{{ path('app_login') }}">
+                    Login
+                </a>
+                <a href="{{ path('app_register') }}">
+                    Sign in
+                </a>
+            {% endif %}
+        </div>
+        <!-- Mobile Menu Icon -->
+        <div class="header__mobile-menu" id="mobile-menu-button">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Mobile Navigation -->
+<div class="mobile-nav" id="mobile-nav">
+    <div class="container__mobile-nav">
+        {% if is_granted('ROLE_ADMIN') and app.request.attributes.get('_route') == 'app_admin' %}
+            <a href="{{ path('app_admin') }}">
+                Dashboard Admin
+            </a>
+            <a href="#">
+                Manage Courses
+            </a>
+            <a href="#">
+                Manage Resources
+            </a>
+            <a href="{{ path('app_home') }}">
+                SkillZone Home
+            </a>
+        {% else %}
+            <a href="{{ path('app_home') }}">
+                Home
+            </a>
+            <a href="#">
+                Courses
+            </a>
+            <a href="#">
+                Resources
+            </a>
+        {% endif %}
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">
+                Logout
+            </a>
+        {% else %}
+            <a href="{{ path('app_login') }}">
+                Login
+            </a>
+            <a href="{{ path('app_register') }}">
+                Sign in
+            </a>
+        {% endif %}
+    </div>
+</div>

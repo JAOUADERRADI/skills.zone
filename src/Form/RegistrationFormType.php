@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;    // Used to create a
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType; // Used for creating a checkbox input
 use Symfony\Component\Form\Extension\Core\Type\PasswordType; // Creates an input field for passwords, ensuring that the text is masked for security
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType; // Used when a field (such as a password) must be entered twice to ensure consistency
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;    // Used for creating a select input for roles
 
 // Import the Assert component from Symfony's Validator, allowing the use of various validation constraints.
 use Symfony\Component\Validator\Constraints as Assert;
@@ -72,6 +73,15 @@ class RegistrationFormType extends AbstractType
                 ],
                 'invalid_message' => 'The password fields must match.',
             ])
+            // ->add('roles', ChoiceType::class, [
+            //     'choices'  => [
+            //         'User' => 'ROLE_USER',
+            //         'Admin' => 'ROLE_ADMIN',
+            //     ],
+            //     'expanded' => false,
+            //     'multiple' => true,
+            //     'label' => 'Roles'
+            // ])
         ;
     }
 
