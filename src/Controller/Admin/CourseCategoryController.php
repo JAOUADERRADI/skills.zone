@@ -10,8 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 #[Route('admin/course/category')]
+#[IsGranted('ROLE_ADMIN')]
 final class CourseCategoryController extends AbstractController
 {
     #[Route(name: 'app_course_category_index', methods: ['GET'])]
@@ -76,6 +79,6 @@ final class CourseCategoryController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('Admin/app_course_category_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_course_category_index', [], Response::HTTP_SEE_OTHER);
     }
 }
