@@ -1,7 +1,201 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
+
+:root {
+    /* Primary Colors */
+    --primary-blue: #1A8FE3;
+    --primary-dark: #0F1114;
+    --primary-white: #FFFFFF;
+    --primary-light-white:#F2F2F2;
+
+    /* Secondary Colors */
+    --secondary-orange: #F37933;
+    --secondary-green: #28A745;
+    --secondary-red: #FF4C4C;
+
+    /* Responsive breakpoints */
+    --breakpoint-mobile: 480px;
+    --breakpoint-tablet: 768px;
+    --breakpoint-desktop: 1024px;
+}
+
+/* Reset CSS */
+
+html {
+    line-height: 1.15; /* Set the default line height for all text within the html element */
+}
 
 body {
-    background-color: skyblue;
+    /* Remove default margins and padding */
+    margin: 0;
+    padding: 0;
+    color: var(--primary-dark);
+    /* font-family: ; /* Global font-family */
+    box-sizing: border-box; /* Set a global box-sizing to include padding and borders in the element's total width and height */
+}
+
+a {
+    text-decoration: none; /* Remove underline from all anchor tags */
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit; /* Inherit font-family from parent element */
+    /* Set font size to 100% of the default size and maintain the line height */
+    font-size: 100%;
+    line-height: 1.15;
+}
+
+img {
+    border-style: none; /* Remove the default border from all images */
+}
+
+/* Form Styles */
+
+.container-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    background-color: var(--primary-white);
+}
+
+/* Styling for the form wrapper, controls width, padding, and visual appearance */
+.form-wrapper {
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 500px;
+    width: 100%;
+    color: var(--primary-dark-blue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title styling */
+.form-wrapper__title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem; /* Space below the title */
+}
+
+/* .form-wrapper__error {
+    background-color: var(--secondary-red);
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+} */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Label styling, defines spacing and font-size */
+.form-group__label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Input field styling */
+.form-group__input {
+    width: 100%;
+    padding: 0.75rem 0;
+    background-color: var(--primary-light-white);
+    border: 1px solid var(--primary-blue);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: var(--primary-dark-blue);
+}
+
+/* Checkbox label styling */
+.form-group__checkbox {
+    display: inline-block;
+    margin-left: 0.5rem;
+}
+
+/* General button styling */
+.button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Primary button with blue background */
+.button--primary {
+    color: var(--primary-light-white);
+    background-color: var(--primary-blue);
+    border: none;
+}
+
+/* Slight opacity change on hover for the primary button */
+.button--primary:hover {
+    opacity: .9;
+    background-color: var(--primary-blue);
+}
+
+/* Redirect message styling */
+.form-wrapper__login-redirect {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* Link styling for the login redirect */
+.form-wrapper__login-link {
+    color: var(--primary-blue);
+}
+
+/* Hover state for login link */
+.form-wrapper__login-link:hover {
+    color: var(--secondary-orange);
+}
+
+/* Styling for required field indicator */
+.required {
+    color: var(--secondary-red);
+    font-weight: bold;
+}
+
+.form-group__checkbox {
+    color: var(--primary-dark-blue) !important; /* Définit la couleur du texte du champ checkbox */
+}
+
+.form-group__error {
+    color: var(--secondary-red);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+
+/* Mobile adjustments: smaller padding and font size */
+@media (max-width: var(--breakpoint-mobile)) {
+    .form-wrapper {
+        padding: 1.5rem;
+    }
+
+    .form-wrapper__title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Tablet adjustments: wider form */
+@media (min-width: var(--breakpoint-tablet)) {
+    .form-wrapper {
+        max-width: 600px;
+    }
+}
+
+/* Desktop adjustments: even wider form */
+@media (min-width: var(--breakpoint-desktop)) {
+    .form-wrapper {
+        max-width: 800px;
+    }
 }
