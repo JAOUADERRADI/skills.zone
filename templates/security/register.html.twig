@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Register
+{% endblock %}
+{% block body %}
+    <div class="container-form">
+        <div class="form-wrapper">
+            <h1 class="form-wrapper__title">
+                Register
+            </h1>
+            {{ form_start(registrationForm) }}
+            <!-- Email Field -->
+            <div class="form-group form-group--email">
+                <label class="form-group__label" for="{{ registrationForm.email.vars.id }}">
+                    Email <span class="required">*</span>
+                </label>
+                {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-group__input'} }) }}
+                {% if form_errors(registrationForm.email) %}
+                    <div class="form-group__error">
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- Password Field -->
+            <div class="form-group form-group--password">
+                <label class="form-group__label" for="{{ registrationForm.plainPassword.first.vars.id }}">
+                    Password <span class="required">*</span>
+                </label>
+                {{ form_widget(registrationForm.plainPassword.first, { 'attr': {'class': 'form-group__input'} }) }}
+                {% if form_errors(registrationForm.plainPassword.first) %}
+                    <div class="form-group__error">
+                        {{ form_errors(registrationForm.plainPassword.first) }}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- Repeat Password Field -->
+            <div class="form-group form-group--password-repeat">
+                <label class="form-group__label" for="{{ registrationForm.plainPassword.second.vars.id }}">
+                    Repeat Password <span class="required">*</span>
+                </label>
+                {{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'form-group__input'} }) }}
+                {% if form_errors(registrationForm.plainPassword.second) %}
+                    <div class="form-group__error">
+                        {{ form_errors(registrationForm.plainPassword.second) }}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- Agree Terms Field -->
+            <div class="form-group form-group--agree-terms">
+                {{ form_row(registrationForm.agreeTerms, { 'attr': {'class': 'form-group__checkbox'} }) }}
+                {% if form_errors(registrationForm.agreeTerms) %}
+                    <div class="form-group__error">
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- Submit Button -->
+            <div class="form-group form-group--submit">
+                <button type="submit" class="button button--primary">
+                    Register
+                </button>
+            </div>
+            {{ form_end(registrationForm) }}
+            <!-- Login Redirect -->
+            <p class="form-wrapper__login-redirect">
+                You have an account? {# <a href="{{ path('app_login') }}" class="form-wrapper__login-link">Login</a> #}
+            </p>
+        </div>
+    </div>
+{% endblock %}
