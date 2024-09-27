@@ -7,11 +7,9 @@
         <h1 class="text-3xl font-bold mb-6 text-center">
             Create new Course Category
         </h1>
-        <!-- Form include with TailwindCSS styles -->
         <div class="mb-6">
             {{ include('Admin/course_category/_form.html.twig') }}
         </div>
-        <!-- Back to list button -->
         <div>
             <a href="{{ path('app_course_category_index') }}" class="text-primary-blue">
                 Back to list

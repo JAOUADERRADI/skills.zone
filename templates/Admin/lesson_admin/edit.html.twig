@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Course{% endblock %}
+{% block title %}Edit Lesson{% endblock %}
 
 {% block body %}
     <div class="max-w-4xl mx-auto mt-24 p-6 bg-primary-light_white rounded-lg shadow-lg text-primary-dark">
         <h1 class="text-3xl font-bold mb-6 text-center">
-            Edit Course
+            Edit Lesson
         </h1>
 
         <div class="mb-6">
-            {{ include('Admin/course/_form.html.twig', {'button_label': 'Update'}) }}
+            {{ include('Admin/lesson_admin/_form.html.twig', {'button_label': 'Update'}) }}
         </div>
 
         <div class="flex justify-between items-center mb-4">
-            <a href="{{ path('app_course_index') }}" class="text-primary-blue hover:underline">
+            <a href="{{ path('app_lesson_admin_index') }}" class="text-primary-blue hover:underline">
                 Back to list
             </a>
-            {{ include('Admin/course/_delete_form.html.twig') }}
+            {{ include('Admin/lesson_admin/_delete_form.html.twig') }}
         </div>
     </div>
 {% endblock %}

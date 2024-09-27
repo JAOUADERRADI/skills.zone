@@ -24,7 +24,7 @@ final class LessonAdminController extends AbstractController
     #[Route(name: 'app_lesson_admin_index', methods: ['GET'])]
     public function index(LessonRepository $lessonRepository): Response
     {
-        return $this->render('lesson_admin/index.html.twig', [
+        return $this->render('Admin/lesson_admin/index.html.twig', [
             'lessons' => $lessonRepository->findAll(),
         ]);
     }
@@ -59,7 +59,7 @@ final class LessonAdminController extends AbstractController
             return $this->redirectToRoute('app_lesson_admin_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('lesson_admin/new.html.twig', [
+        return $this->render('Admin/lesson_admin/new.html.twig', [
             'lesson' => $lesson,
             'form' => $form,
         ]);
@@ -68,7 +68,7 @@ final class LessonAdminController extends AbstractController
     #[Route('/{id}', name: 'app_lesson_admin_show', methods: ['GET'])]
     public function show(Lesson $lesson): Response
     {
-        return $this->render('lesson_admin/show.html.twig', [
+        return $this->render('Admin/lesson_admin/show.html.twig', [
             'lesson' => $lesson,
         ]);
     }
@@ -85,7 +85,7 @@ final class LessonAdminController extends AbstractController
             return $this->redirectToRoute('app_lesson_admin_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('lesson_admin/edit.html.twig', [
+        return $this->render('Admin/lesson_admin/edit.html.twig', [
             'lesson' => $lesson,
             'form' => $form,
         ]);
