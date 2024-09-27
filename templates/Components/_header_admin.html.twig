@@ -8,18 +8,21 @@
         </div>
         <!-- Navigation Links -->
         <nav class="header__nav">
-            <a href="{{ path('app_admin') }}">
-                Dashboard Admin
-            </a>
             <a href="{{ path('app_course_index') }}">
                 Manage Courses
             </a>
             <a href="#">
                 Manage Resources
             </a>
-            <a href="{{ path('app_home') }}">
-                SkillZone Home
+            <a href="{{ path('app_course_category_index') }}">
+                Courses Category
             </a>
+            <a href="{{ path('app_post_category_index') }}">
+                Posts Category
+            </a>
+            {# <a href="{{ path('app_home') }}">
+                SkillZone Home
+            </a> #}
         </nav>
         <!-- Profile Icon -->
         <div class="header__profile" id="profile-menu-button">
@@ -27,8 +30,8 @@
         </div>
         <!-- Dropdown Menu -->
         <div class="header__dropdown" id="profile-dropdown">
-            <a href="{{ path('app_admin') }}">
-                Dashboard Admin
+            <a href="{{ path('app_home') }}">
+                SkillsZone Home
             </a>
             <a href="{{ path('app_logout') }}">
                 Logout
