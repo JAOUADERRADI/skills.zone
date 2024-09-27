@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 
 #[Route('/admin/lesson')]
@@ -73,7 +74,7 @@ final class LessonAdminController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_lesson_admin_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Lesson $lesson, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Lesson $lesson, EntityManagerInterface $entityManager, Security $security): Response
     {
         $form = $this->createForm(LessonType::class, $lesson);
         $form->handleRequest($request);
