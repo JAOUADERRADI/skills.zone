@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -27,13 +28,16 @@ final class CourseAdminController extends AbstractController
     }
 
     #[Route('/new', name: 'app_course_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
         $course = new Course();
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $security->getUser(); // Get the currently authenticated user
+            $course->setUser($user); // Set the user who is creating the course
+
             // File upload logic
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
@@ -68,12 +72,15 @@ final class CourseAdminController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_course_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Course $course, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Course $course, EntityManagerInterface $entityManager, Security $security): Response
     {
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $security->getUser(); // Get the current user
+            $course->updateTimestamp($user); // Update the timestamp and the user
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
