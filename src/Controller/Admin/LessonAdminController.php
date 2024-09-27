@@ -80,6 +80,29 @@ final class LessonAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $videoFile */
+            $videoFile = $form->get('video')->getData();
+
+            if ($videoFile) {
+
+                // Delete the old video if it exists
+                $oldVideo = $lesson->getVideo();
+                if ($oldVideo) {
+                    $oldVideoPath = $this->getParameter('videos_directory').'/'.$oldVideo;
+                    if (file_exists($oldVideoPath)) {
+                        unlink($oldVideoPath);
+                    }
+                }
+
+                // Handle the new video upload
+                $originalFilename = pathinfo($videoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$videoFile->guessExtension();
+
+                $videoFile->move($this->getParameter('videos_directory'), $newFilename);
+                $lesson->setVideo($newFilename);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_lesson_admin_index', [], Response::HTTP_SEE_OTHER);
@@ -95,6 +118,16 @@ final class LessonAdminController extends AbstractController
     public function delete(Request $request, Lesson $lesson, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lesson->getId(), $request->getPayload()->getString('_token'))) {
+            // Delete the video associated with the lesson
+            $video = $lesson->getVideo();
+            if ($video) {
+                $videoPath = $this->getParameter('videos_directory').'/'.$video;
+                if (file_exists($videoPath)) {
+                    unlink($videoPath);
+                }
+            }
+
+            // Delete the lesson
             $entityManager->remove($lesson);
             $entityManager->flush();
         }

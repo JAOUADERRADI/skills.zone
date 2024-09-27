@@ -72,7 +72,7 @@ final class CourseAdminController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_course_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Course $course, EntityManagerInterface $entityManager, Security $security): Response
+    public function edit(Request $request, Course $course, EntityManagerInterface $entityManager, Security $security, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
@@ -80,6 +80,29 @@ final class CourseAdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $security->getUser(); // Get the current user
             $course->updateTimestamp($user); // Update the timestamp and the user
+
+            // Check if a new image is uploaded
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                // Delete the old image if exists
+                $oldImage = $course->getImage();
+                if ($oldImage) {
+                    $oldImagePath = $this->getParameter('images_directory').'/'.$oldImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Handle the new image upload
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                $imageFile->move($this->getParameter('images_directory'), $newFilename);
+                $course->setImage($newFilename);
+            }
 
             $entityManager->flush();
 
@@ -95,7 +118,18 @@ final class CourseAdminController extends AbstractController
     #[Route('/{id}', name: 'app_course_delete', methods: ['POST'])]
     public function delete(Request $request, Course $course, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$course->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$course->getId(), $request->request->get('_token'))) {
+            // Get the image of the course
+            $image = $course->getImage();
+            if ($image) {
+                // Delete the image file
+                $imagePath = $this->getParameter('images_directory').'/'.$image;
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+
+            // Delete the course
             $entityManager->remove($course);
             $entityManager->flush();
         }
