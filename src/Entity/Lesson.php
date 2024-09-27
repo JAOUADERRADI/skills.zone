@@ -33,6 +33,11 @@ class Lesson
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();  // Initialise createdAt à la date actuelle
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,5 +113,11 @@ class Lesson
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    #[ORM\PreUpdate]
+    public function updateTimestamp(User $user): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }
