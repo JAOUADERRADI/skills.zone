@@ -1,43 +1,104 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Lesson index{% endblock %}
-
+{% block title %}
+    Lesson index
+{% endblock %}
 {% block body %}
-    <h1>Lesson index</h1>
+    {# <h1>Lesson index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Video</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for lesson in lessons %}
-            <tr>
-                <td>{{ lesson.id }}</td>
-                <td>{{ lesson.title }}</td>
-                <td>{{ lesson.description }}</td>
-                <td>{{ lesson.video }}</td>
-                <td>{{ lesson.createdAt ? lesson.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ lesson.updatedAt ? lesson.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_lesson_admin_show', {'id': lesson.id}) }}">show</a>
-                    <a href="{{ path('app_lesson_admin_edit', {'id': lesson.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Video</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for lesson in lessons %}
+                    <tr>
+                        <td>{{ lesson.id }}</td>
+                        <td>{{ lesson.title }}</td>
+                        <td>{{ lesson.description }}</td>
+                        <td>{{ lesson.video }}</td>
+                        <td>{{ lesson.createdAt ? lesson.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ lesson.updatedAt ? lesson.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('app_lesson_admin_show', {'id': lesson.id}) }}">show</a>
+                            <a href="{{ path('app_lesson_admin_edit', {'id': lesson.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    <a href="{{ path('app_lesson_admin_new') }}">Create new</a>
+            <a href="{{ path('app_lesson_admin_new') }}">Create new</a> #}
+    <div class="flex flex-col pt-20 max-w-8xl mx-auto p-6">
+        <section class="mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold">
+                    Courses lessons Management
+                </h1>
+                <a href="{{ path('app_lesson_admin_new') }}" class="bg-secondary-green text-primary-white px-4 py-2 rounded-lg hover:bg-green-600">
+                    Create new category for course
+                </a>
+            </div>
+        </section>
+        <table class="w-full mt-6  rounded-lg shadow-lg">
+            <thead class="w-full">
+                <tr class="w-full bg-primary-light_white text-left text-primary-dark">
+                    <th class="p-4">
+                        Id
+                    </th>
+                    <th class="p-4">
+                        Name
+                    </th>
+                    <th class="p-4">
+                        Description
+                    </th>
+                    <th class="p-4">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Repeat for each lesson -->
+                {% for lesson in lessons %}
+                    <tr class="border-t border-gray-700">
+                        <td class="p-4">
+                            {{ lesson.id }}
+                        </td>
+                        <td class="p-4">
+                            {{ lesson.title }}
+                        </td>
+                        <td class="p-4">
+                            {{ lesson.description }}
+                        </td>
+                        <td class="p-4 flex space-x-4">
+                            <a href="{{ path('app_lesson_admin_show', {'id': lesson.id}) }}" class="text-secondary-orange hover:text-orange-400">
+                                Show
+                            </a>
+                            <a href="{{ path('app_lesson_admin_edit', {'id': lesson.id}) }}" class="text-secondary-orange hover:text-orange-400">
+                                Edit
+                            </a>
+                            {{ include('Admin/lesson_admin/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-secondary-red p-4">
+                            no records found
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
