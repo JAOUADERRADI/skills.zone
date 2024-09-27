@@ -210,7 +210,7 @@ class Course
     /**
      * @ORM\PreUpdate
      */
-    public function updateTimestamp(): void
+    public function updateTimestamp(User $user): void
     {
         $this->updatedAt = new \DateTimeImmutable();
         $this->updatedBy = $user;
