@@ -3,9 +3,19 @@
 {% block title %}New Course{% endblock %}
 
 {% block body %}
-    <h1>Create new Course</h1>
+    <div class="max-w-4xl mx-auto mt-24 p-6 bg-primary-light_white rounded-lg shadow-lg text-primary-dark">
+        <h1 class="text-3xl font-bold mb-6 text-center">
+            Create new Course
+        </h1>
 
-    {{ include('Admin/course/_form.html.twig') }}
+        <div class="mb-6">
+            {{ include('Admin/course/_form.html.twig') }}
+        </div>
 
-    <a href="{{ path('app_course_index') }}">back to list</a>
+        <div class="text-center">
+            <a href="{{ path('app_course_index') }}" class="text-primary-blue hover:underline">
+                Back to list
+            </a>
+        </div>
+    </div>
 {% endblock %}
