@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
-#[Route('admin/course/category')]
+#[Route('admin/course-category')]
 #[IsGranted('ROLE_ADMIN')]
 final class CourseCategoryController extends AbstractController
 {
