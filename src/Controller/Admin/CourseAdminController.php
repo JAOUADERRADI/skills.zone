@@ -129,6 +129,19 @@ final class CourseAdminController extends AbstractController
                 }
             }
 
+            // Loop through all lessons associated with the course
+            foreach ($course->getLessons() as $lesson) {
+                // Get the video of the lesson
+                $video = $lesson->getVideo();
+                if ($video) {
+                    // Delete the video file
+                    $videoPath = $this->getParameter('videos_directory').'/'.$video;
+                    if (file_exists($videoPath)) {
+                        unlink($videoPath);
+                    }
+                }
+            }
+
             // Delete the course
             $entityManager->remove($course);
             $entityManager->flush();
