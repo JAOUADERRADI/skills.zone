@@ -55,6 +55,7 @@ class Course
     {
         $this->lessons = new ArrayCollection();
         $this->enrollments = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();  // Initialise createdAt à la date actuelle
     }
 
     public function getId(): ?int
@@ -202,6 +203,27 @@ class Course
                 $enrollment->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateTimestamp(User $user): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->updatedBy = $user;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): static
+    {
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }

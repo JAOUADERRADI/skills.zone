@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Course index
+{% endblock %}
+{% block body %}
+    <div class="flex flex-col pt-20 max-w-8xl mx-auto p-6">
+        <section class="mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold">
+                    Course Management
+                </h1>
+                <a href="{{ path('app_course_new') }}" class="bg-secondary-green text-primary-white px-4 py-2 rounded-lg hover:bg-green-600">
+                    Create new course
+                </a>
+            </div>
+        </section>
+        <table class="w-full mt-6 rounded-lg shadow-lg">
+            <thead class="w-full">
+                <tr class="w-full bg-primary-light_white text-left text-primary-dark">
+                    <th class="p-4">
+                        Id
+                    </th>
+                    <th class="p-4">
+                        Title
+                    </th>
+                    <th class="p-4">
+                        Description
+                    </th>
+                    {# <th class="p-4">
+                        Image
+                    </th> #}
+                    <th class="p-4">
+                        CreatedAt
+                    </th>
+                    {# <th class="p-4">
+                        UpdatedAt
+                    </th> #}
+                    <th class="p-4">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Repeat for each course -->
+                {% for course in courses %}
+                    <tr class="border-t border-gray-700">
+                        <td class="p-4">
+                            {{ course.id }}
+                        </td>
+                        <td class="p-4">
+                            {{ course.title }}
+                        </td>
+                        <td class="p-4">
+                            {{ course.description }}
+                        </td>
+                        {# <td class="p-4">
+                            {{ course.image ? course.image : 'No image' }}
+                        </td> #}
+                        <td class="p-4">
+                            {{ course.createdAt ? course.createdAt|date('Y-m-d H:i:s') : '' }}
+                        </td>
+                        {# <td class="p-4">
+                            {{ course.updatedAt ? course.updatedAt|date('Y-m-d H:i:s') : '' }}
+                        </td> #}
+                        <td class="p-4 flex space-x-4">
+                            <a href="{{ path('app_course_show', {'id': course.id}) }}" class="text-secondary-orange hover:text-orange-400">
+                                Show
+                            </a>
+                            <a href="{{ path('app_course_edit', {'id': course.id}) }}" class="text-secondary-orange hover:text-orange-400">
+                                Edit
+                            </a>
+                            {{ include('Admin/course/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center text-secondary-red p-4">
+                            No records found
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
