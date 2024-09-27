@@ -1,6 +1,5 @@
 <header class="header">
-    <div
-        class="header__container">
+    <div class="header__container">
         <!-- Logo -->
         <div class="header__logo">
             <a href="{{ path("app_home") }}">
@@ -9,28 +8,18 @@
         </div>
         <!-- Navigation Links -->
         <nav class="header__nav">
-            {% if is_granted('ROLE_ADMIN') and app.request.attributes.get('_route') == 'app_admin' %}
+            <a href="{{ path('app_home') }}">
+                Home
+            </a>
+            <a href="#">
+                Courses
+            </a>
+            <a href="#">
+                Resources
+            </a>
+            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('app_admin') }}">
                     Dashboard Admin
-                </a>
-                <a href="#">
-                    Manage Courses
-                </a>
-                <a href="#">
-                    Manage Resources
-                </a>
-                <a href="{{ path('app_home') }}">
-                    SkillZone Home
-                </a>
-            {% else %}
-                <a href="{{ path('app_home') }}">
-                    Home
-                </a>
-                <a href="#">
-                    Courses
-                </a>
-                <a href="#">
-                    Resources
                 </a>
             {% endif %}
         </nav>
@@ -67,28 +56,18 @@
 <!-- Mobile Navigation -->
 <div class="mobile-nav" id="mobile-nav">
     <div class="container__mobile-nav">
-        {% if is_granted('ROLE_ADMIN') and app.request.attributes.get('_route') == 'app_admin' %}
+        <a href="{{ path('app_home') }}">
+            Home
+        </a>
+        <a href="#">
+            Courses
+        </a>
+        <a href="#">
+            Resources
+        </a>
+        {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_admin') }}">
                 Dashboard Admin
-            </a>
-            <a href="#">
-                Manage Courses
-            </a>
-            <a href="#">
-                Manage Resources
-            </a>
-            <a href="{{ path('app_home') }}">
-                SkillZone Home
-            </a>
-        {% else %}
-            <a href="{{ path('app_home') }}">
-                Home
-            </a>
-            <a href="#">
-                Courses
-            </a>
-            <a href="#">
-                Resources
             </a>
         {% endif %}
         {% if app.user %}
