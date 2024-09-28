@@ -39,9 +39,31 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        # Admin panel general access
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/admin/course/category, roles: ROLE_ADMIN }
-        - { path: ^/admin/post/category, roles: ROLE_ADMIN }
+
+        # Course administration
+        - { path: ^/admin/course/new, roles: ROLE_ADMIN }
+        - { path: ^/admin/course/edit, roles: ROLE_ADMIN }
+        - { path: ^/admin/course/delete, roles: ROLE_ADMIN }
+        - { path: ^/admin/course/show, roles: ROLE_ADMIN }
+
+        # Course category administration
+        - { path: ^/admin/course/category/new, roles: ROLE_ADMIN }
+        - { path: ^/admin/course/category/edit, roles: ROLE_ADMIN }
+        - { path: ^/admin/course/category/delete, roles: ROLE_ADMIN }
+
+        # Resource administration
+        - { path: ^/admin/resource/new, roles: ROLE_ADMIN }
+        - { path: ^/admin/resource/edit, roles: ROLE_ADMIN }
+        - { path: ^/admin/resource/delete, roles: ROLE_ADMIN }
+        - { path: ^/admin/resource/show, roles: ROLE_ADMIN }
+
+        # Post category administration
+        - { path: ^/admin/resource/category/new, roles: ROLE_ADMIN }
+        - { path: ^/admin/resource/category/edit, roles: ROLE_ADMIN }
+        - { path: ^/admin/resource/category/delete, roles: ROLE_ADMIN }
+
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
