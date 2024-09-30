@@ -52,6 +52,7 @@ class PostType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Upload Image',
                 'required' => false,
+                'mapped' => false,
                 'constraints' => [
                     new Assert\Image([
                         'maxSize' => '10M',
