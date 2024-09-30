@@ -16,6 +16,7 @@ class HomeController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $courses = $entityManager->getRepository(Course::class)->findAll();
+        shuffle($courses);
         $categories = $entityManager->getRepository(CourseCategory::class)->findAll();
 
         return $this->render('Frontend/home/index.html.twig', [
