@@ -1,0 +1,21 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block title %}New Post{% endblock %}
+
+{% block body %}
+    <div class="max-w-4xl mx-auto mt-24 p-6 bg-primary-light_white rounded-lg shadow-lg text-primary-dark">
+        <h1 class="text-3xl font-bold mb-6 text-center">
+            Create new Post
+        </h1>
+
+        <div class="mb-6">
+            {{ include('Admin/post_admin/_form.html.twig') }}
+        </div>
+
+        <div class="text-center">
+            <a href="{{ path('app_post_admin_index') }}" class="text-primary-blue hover:underline">
+                Back to list
+            </a>
+        </div>
+    </div>
+{% endblock %}

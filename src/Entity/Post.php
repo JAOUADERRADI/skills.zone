@@ -44,6 +44,11 @@ class Post
     #[ORM\Column(type: 'string', enumType: PostStatus::class)]
     private PostStatus $status = PostStatus::Draft;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();  // Initialise createdAt à la date actuelle
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -154,5 +159,11 @@ class Post
         $this->status = $status;
 
         return $this;
+    }
+
+    #[ORM\PreUpdate]
+    public function updateTimestamp(User $user): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }

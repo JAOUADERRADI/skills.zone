@@ -1,0 +1,54 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col pt-20 max-w-8xl mx-auto p-6">
+        <section class="mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold">
+                    Post Management
+                </h1>
+                <a href="{{ path('app_post_admin_new') }}" class="bg-secondary-green text-primary-white px-4 py-2 rounded-lg hover:bg-green-600">
+                    Create new post
+                </a>
+            </div>
+        </section>
+        <table class="w-full mt-6 rounded-lg shadow-lg">
+            <thead class="w-full">
+                <tr class="w-full bg-primary-light_white text-left text-primary-dark">
+                    <th class="p-4">Id</th>
+                    <th class="p-4">Title</th>
+                    <th class="p-4">Description</th>
+                    <th class="p-4">Status</th>
+                    <th class="p-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr class="border-t border-gray-700">
+                        <td class="p-4">{{ post.id }}</td>
+                        <td class="p-4">{{ post.title }}</td>
+                        <td class="p-4">{{ post.description }}</td>
+                        <td class="p-4">{{ post.status.value }}</td>
+                        <td class="p-4 flex space-x-4">
+                            <a href="{{ path('app_post_admin_show', {'id': post.id}) }}" class="text-secondary-orange hover:text-orange-400">
+                                Show
+                            </a>
+                            <a href="{{ path('app_post_admin_edit', {'id': post.id}) }}" class="text-secondary-orange hover:text-orange-400">
+                                Edit
+                            </a>
+                            {{ include('Admin/post_admin/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9" class="text-center text-secondary-red p-4">
+                            No records found
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

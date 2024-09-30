@@ -1,0 +1,60 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block title %}Post Details{% endblock %}
+
+{% block body %}
+    <div class="max-w-6xl mx-auto mt-24 p-6 bg-primary-light_white rounded-lg shadow-lg text-primary-dark">
+        <h1 class="text-4xl font-bold mb-8 text-center">
+            Post Details
+        </h1>
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto bg-primary-white shadow-md rounded-lg">
+                <tbody>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Id</th>
+                        <td class="p-4">{{ post.id }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Title</th>
+                        <td class="p-4">{{ post.title }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Content</th>
+                        <td class="p-4">{{ post.content }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Description</th>
+                        <td class="p-4">{{ post.description }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Image</th>
+                        <td class="p-4">{{ post.image }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">CreatedAt</th>
+                        <td class="p-4">{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">UpdatedAt</th>
+                        <td class="p-4">{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Status</th>
+                        <td class="p-4">{{ post.status.value }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="flex justify-between items-center mt-8">
+            <a href="{{ path('app_post_admin_index') }}" class="text-primary-blue hover:underline">
+                Back to list
+            </a>
+            <div class="flex justify-between items-center">
+                <a href="{{ path('app_post_admin_edit', {'id': post.id}) }}" class="text-primary-blue hover:underline">
+                    Edit
+                </a>
+                {{ include('Admin/post_admin/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
