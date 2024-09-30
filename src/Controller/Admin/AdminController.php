@@ -2,6 +2,10 @@
 
 namespace App\Controller\Admin;
 
+
+use App\Repository\UserRepository;
+use App\Repository\CourseRepository;
+use App\Repository\LessonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,10 +15,20 @@ class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
     #[IsGranted('ROLE_ADMIN')]
-    public function index(): Response
+    public function index(UserRepository $userRepository, CourseRepository $courseRepository, LessonRepository $lessonRepository): Response
     {
+        $totalUsers = $userRepository->count([]);
+
+        $totalCourses = $courseRepository->count([]);
+
+        $totalLessons = $lessonRepository->count([]);
+
+        // $newUsersThisMonth = $userRepository->countNewUsersThisMonth();
         return $this->render('Admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'totalUsers' => $totalUsers,
+            'totalCourses' => $totalCourses,
+            'totalLessons' => $totalLessons,
+            // 'newUsersThisMonth' => $newUsersThisMonth,
         ]);
     }
 }
