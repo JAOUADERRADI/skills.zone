@@ -31,6 +31,17 @@
                     } %}
                 {% endfor %}
             </div>
+            <h2 class="mt-20 text-2xl sm:text-4xl font-bold">
+                Our Best Resources.
+            </h2>
+            <div class="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for post in posts | slice(0,6) %}
+                    {% include 'Components/_card.html.twig' with {
+                        'entity': post,
+                        'entity_route': 'app_post_admin_show'
+                    } %}
+                {% endfor %}
+            </div>
         </main>
     </div>
 {% endblock %}
