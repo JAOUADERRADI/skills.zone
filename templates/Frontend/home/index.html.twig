@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello HomeController!{% endblock %}
-
+{% block title %}
+    Hello HomeController!
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/jaouad/Desktop/skills.zone/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/home/jaouad/Desktop/skills.zone/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <div class="flex max-w-8xl mx-auto">
+        <main class="w-full p-6">
+            <section class="bg-cover bg-center bg-no-repeat text-white py-20 rounded-lg" style="background-image: url('https://cdn.pixabay.com/photo/2015/07/15/11/48/rustic-846054_960_720.jpg');">
+                <div class="container mx-auto px-4">
+                    <div class="text-center bg-transparent bg-opacity-0 backdrop-blur-lg p-6 rounded-lg">
+                        <h1 class="text-5xl font-bold mb-6">
+                            Welcome to SkillsZone
+                        </h1>
+                        <p class="text-lg mb-6">
+                            The e-learning platform designed for developers, where all resources are centralized in one place.
+                        </p>
+                        <a href="#courses" class="bg-primary-orange text-white px-6 py-3 rounded-full hover:bg-primary-dark-blue transition">
+                            Start Learning
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <h2 class="mt-20 text-2xl sm:text-4xl font-bold">
+                Our Best Courses.
+            </h2>
+            <div class="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for course in courses | slice(0,6) %}
+                    {% include 'Components/_card.html.twig' %}
+                {% endfor %}
+            </div>
+        </main>
+    </div>
 {% endblock %}
