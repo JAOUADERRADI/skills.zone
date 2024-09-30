@@ -67,7 +67,7 @@ class PostType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => PostCategory::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
         ;
     }
