@@ -78,4 +78,22 @@ class CourseController extends AbstractController
 
         return $this->redirectToRoute('app_course_show', ['id' => $id]);
     }
+
+    #[Route('/my-courses', name: 'user_courses')]
+    public function myCourses(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $enrollments = $entityManager->getRepository(Enrollment::class)->findBy([
+            'user' => $user
+        ]);
+
+        return $this->render('Frontend/course/my_courses.html.twig', [
+            'enrollments' => $enrollments,
+        ]);
+    }
 }

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    My Enrolled Courses | SkillsZone
+{% endblock %}
+{% block body %}
+    <div class="flex max-w-8xl mx-auto">
+        <main class="w-full p-6">
+            <h1 class="text-4xl font-bold mb-8 text-center">
+                My Enrolled Courses
+            </h1>
+            {% if enrollments is empty %}
+                <p class="text-center text-lg">
+                    You are not enrolled in any courses yet.
+                </p>
+            {% else %}
+                <div class="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {% for enrollment in enrollments %}
+                        {% include 'Components/_card.html.twig' with {
+                            'entity': enrollment.course,
+                            'entity_route': 'app_course_show'
+                        } %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </main>
+    </div>
+{% endblock %}
