@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 class CourseController extends AbstractController
@@ -76,7 +77,7 @@ class CourseController extends AbstractController
             $this->addFlash('warning', 'You are already enrolled in this course.');
         }
 
-        return $this->redirectToRoute('app_course_show', ['id' => $id]);
+        return $this->redirectToRoute('app_course_show', ['id' => $course->getId()]);
     }
 
     #[Route('/my-courses', name: 'user_courses')]

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    {{ course.title }}- Learn
+    {{ course.title }}
+    - Learn
 {% endblock %}
 {% block body %}
     <div class="bg-primary-light_white max-w-8xl mx-auto mt-20 p-6 rounded-lg shadow-lg my-6">
@@ -45,10 +46,16 @@
                 {% if isEnrolled %}
                     <!-- First video -->
                     {% set firstLesson = course.lessons|first %}
-                    <video id="lessonVideo" controls class="w-full h-auto rounded-lg shadow-lg" loading="lazy">
-                        <source id="videoSource" src="{{ asset('uploads/videos/' ~ firstLesson.video) }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    {% if firstLesson %}
+                        <video id="lessonVideo" controls class="w-full h-auto rounded-lg shadow-lg" loading="lazy">
+                            <source id="videoSource" src="{{ asset('uploads/videos/' ~ firstLesson.video) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    {% else %}
+                        <p class="info-message">
+                            No lessons available for this course yet.
+                        </p>
+                    {% endif %}
                 {% else %}
                     <p class="info-message">
                         You are not enrolled in this course. Please enroll to access the videos.
