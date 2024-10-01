@@ -1,23 +1,23 @@
 <a
-    href="{{ path(entity_route, { id: entity.id }) }}" class="bg-primary-light_white mt-6 p-2 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
+    href="{{ path(entity_route, { id: entity.id }) }}" class="bg-primary-light_white p-2 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
     <!-- Image Section -->
     <img
     src="{{ asset('uploads/images/' ~ entity.image) }}" loading="lazy" alt="{{ entity.title }}" class="rounded-lg w-full max-h-[300px] object-cover">
 
     <!-- Title -->
-    <h3 class="text-lg font-bold m-3">
+    <h3 class="text-lg font-bold m-3 text-ellipsis whitespace-nowrap">
         {{ entity.title }}
     </h3>
 
     <!-- Category (if exists) -->
     {% if entity.category is defined %}
-    <h3 class="text-primary-300 m-3 text-sm">
+    <h3 class="text-primary-300 m-3 text-sm text-ellipsis whitespace-nowrap">
         {{ entity.category.name }}
     </h3>
     {% endif %}
 
     <!-- Description -->
-    <p class="m-3 mb-6 line-clamp-2">
+    <p class="m-3 mb-6 line-clamp-2 overflow-hidden text-ellipsis">
         {{ entity.description }}
     </p>
 </a>
