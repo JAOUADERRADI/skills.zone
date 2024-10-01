@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ course.title }}- Learn
+{% endblock %}
+{% block body %}
+    <div class="bg-primary-light_white max-w-8xl mx-auto mt-20 p-6 rounded-lg shadow-lg my-6">
+        <h1 class="text-4xl font-bold mb-4 text-center">
+            {{ course.title }}
+        </h1>
+        <p class="mb-6 text-center">
+            {{ course.description }}
+        </p>
+        <p class="mb-4 text-center">
+            Gain access to all the lessons and materials by enrolling in this course.
+        </p>
+        <!-- Conditional Rendering Based on Enrollment Status -->
+        <div class="text-center">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if not isEnrolled %}
+                    <form method="post" action="{{ path('app_course_enroll', {id: course.id}) }}">
+                        <button type="submit" class="button button--primary">
+                            Enroll Now
+                        </button>
+                    </form>
+                {% else %}
+                    <!-- If user is already enrolled, show this instead -->
+                    <p class="text-secondary-green font-bold">
+                        You are already enrolled in this course!
+                    </p>
+                {% endif %}
+            {% else %}
+                <a href="{{ path('app_login') }}" class="button button--primary">
+                    Login to Enroll
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div
+        class="bg-primary-light_white flex max-w-8xl mx-auto flex-col items-center rounded-lg">
+        <!-- Main Content for Single Course -->
+        <main
+            class="w-full mx-auto p-6">
+            <!-- Video Section -->
+            <div class="mb-8">
+                {% if isEnrolled %}
+                    <!-- First video -->
+                    {% set firstLesson = course.lessons|first %}
+                    <video id="lessonVideo" controls class="w-full h-auto rounded-lg shadow-lg" loading="lazy">
+                        <source id="videoSource" src="{{ asset('uploads/videos/' ~ firstLesson.video) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% else %}
+                    <p class="info-message">
+                        You are not enrolled in this course. Please enroll to access the videos.
+                    </p>
+                {% endif %}
+            </div>
+            <!-- Lessons Section -->
+            <div class="mx-auto">
+                <h2 class="text-3xl font-bold mb-4">
+                    Lessons
+                </h2>
+                <ul class="space-y-4 max-h-96 overflow-y-auto">
+                    {% for lesson in course.lessons %}
+                        <li class="bg-primary-white p-4 rounded-lg">
+                            <h3 class="text-xl font-bold">
+                                <a class="text-primary-blue hover:underline cursor-pointer" onclick="changeVideo('{{ asset('uploads/videos/' ~ lesson.video) }}', '{{ lesson.title }}')">
+                                    Lesson
+                                    {{ loop.index }}
+                                    :
+                                    {{ lesson.title }}
+                                </a>
+                            </h3>
+                            <p class="mt-2">
+                                {{ lesson.description }}
+                            </p>
+                        </li>
+                    {% else %}
+                        <p class="info-message">
+                            No lessons available for this course yet.
+                        </p>
+                    {% endfor %}
+                </ul>
+            </div>
+        </main>
+    </div>
+    <script>
+        function changeVideo(videoUrl, title) {
+            const videoElement = document.getElementById('lessonVideo');
+            const videoSource = document.getElementById('videoSource');
+            videoSource.src = videoUrl;
+            videoElement.load();
+            videoElement.play();
+            document.title = title + " - Learn";
+        }
+    </script>
+{% endblock %}
