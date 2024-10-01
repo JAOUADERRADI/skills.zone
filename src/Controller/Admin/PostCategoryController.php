@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
-#[Route('admin/resource/category')]
+#[Route('admin/resource-category')]
 #[IsGranted('ROLE_ADMIN')]
 final class PostCategoryController extends AbstractController
 {
