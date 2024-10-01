@@ -27,4 +27,23 @@ class CourseController extends AbstractController
             'courses' => $courses,
         ]);
     }
+
+    #[Route('/{id}', name: 'course_show', methods: ['GET'])]
+    public function show(Course $course, EnrollmentRepository $enrollmentRepository): Response
+    {
+        $user = $this->getUser();
+        $isEnrolled = false;
+
+        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $isEnrolled = $enrollmentRepository->findOneBy([
+                'user' => $user,
+                'course' => $course,
+            ]) !== null;
+        }
+
+        return $this->render('Frontend/course/show.html.twig', [
+            'course' => $course,
+            'isEnrolled' => $isEnrolled,
+        ]);
+    }
 }
