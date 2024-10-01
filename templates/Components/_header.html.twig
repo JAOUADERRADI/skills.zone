@@ -1,5 +1,6 @@
 <header class="header">
-    <div class="header__container">
+    <div
+        class="header__container">
         <!-- Logo -->
         <div class="header__logo">
             <a href="{{ path("app_home") }}">
@@ -11,12 +12,17 @@
             <a href="{{ path('app_home') }}">
                 Home
             </a>
-            <a href="{{ path('app_home') }}">
+            <a href="{{ path('app_course') }}">
                 Courses
             </a>
             <a href="{{ path('app_home') }}">
                 Resources
             </a>
+            {% if app.user %}
+                <a href="{{ path('user_courses') }}">
+                    My courses
+                </a>
+            {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('app_admin') }}">
                     Dashboard Admin
@@ -35,6 +41,9 @@
                         Dashboard Admin
                     </a>
                 {% endif %}
+                <a href="{{ path('user_courses') }}">
+                    My courses
+                </a>
                 <a href="{{ path('app_logout') }}">
                     Logout
                 </a>
@@ -54,12 +63,12 @@
     </div>
 </header>
 <!-- Mobile Navigation -->
-<div class="mobile-nav" id="mobile-nav">
+<div class="mobile-nav z-10" id="mobile-nav">
     <div class="container__mobile-nav">
         <a href="{{ path('app_home') }}">
             Home
         </a>
-        <a href="#">
+        <a href="{{ path('user_courses') }}">
             Courses
         </a>
         <a href="#">
@@ -71,6 +80,9 @@
             </a>
         {% endif %}
         {% if app.user %}
+            <a href="{{ path('user_courses') }}">
+                My courses
+            </a>
             <a href="{{ path('app_logout') }}">
                 Logout
             </a>
