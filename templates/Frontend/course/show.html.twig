@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ course.title }}
+    - Learn
+{% endblock %}
+{% block body %}
+    <div class="bg-gray-800 max-w-8xl mx-auto mt-20 p-6 rounded-lg shadow-lg my-6">
+        <h1 class="text-4xl font-bold mb-4 text-center">
+            {{ course.title }}
+        </h1>
+        <p class="mb-6 text-center">
+            {{ course.description }}
+        </p>
+        <p class="text-gray-200 mb-4 text-center">
+            Gain access to all the lessons and materials by enrolling in this course.
+        </p>
+        <!-- Conditional Rendering Based on Enrollment Status -->
+        <div class="text-center">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if not isEnrolled %}
+                    <form method="post" action="{{ path('app_course_enroll', {id: course.id}) }}">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-full transition duration-300">
+                            Enroll Now
+                        </button>
+                    </form>
+                {% else %}
+                    <!-- If user is already enrolled, show this instead -->
+                    <p class="text-green-500 font-bold">
+                        You are already enrolled in this course!
+                    </p>
+                {% endif %}
+            {% else %}
+                <a href="{{ path('app_login') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-full transition duration-300">
+                    Login to Enroll
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

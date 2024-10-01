@@ -63,7 +63,7 @@ final class CourseAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_course_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'admin_course_show', methods: ['GET'])]
     public function show(Course $course): Response
     {
         return $this->render('Admin/course/show.html.twig', [
