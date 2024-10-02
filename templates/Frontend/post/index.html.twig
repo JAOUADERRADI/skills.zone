@@ -3,18 +3,41 @@
 {% block title %}Hello PostController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="flex max-w-8xl mx-auto">
+        <main class="w-full p-6">
+            <section class="bg-cover bg-center bg-no-repeat text-white py-20 rounded-lg" style="background-image: url('https://cdn.pixabay.com/photo/2015/07/15/11/48/rustic-846054_960_720.jpg');">
+                <div class="container mx-auto px-4">
+                    <div class="text-center bg-transparent bg-opacity-0 backdrop-blur-lg p-6 rounded-lg">
+                        <h1 class="text-5xl font-bold mb-6">
+                            Explore Our Courses
+                        </h1>
+                        <p class="text-lg mb-6">
+                            Enhance your skills with our comprehensive developer courses.
+                        </p>
+                        <a href="#courses" class="bg-primary-orange text-white px-6 py-3 rounded-full hover:bg-primary-dark-blue transition">
+                            Browse Courses
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <h2 id="courses" class="mt-20 mb-20 text-2xl sm:text-4xl font-bold">
+                All Courses
+            </h2>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/jaouad/Desktop/skills.zone/src/Controller/PostController.php</code></li>
-        <li>Your template at <code>/home/jaouad/Desktop/skills.zone/templates/post/index.html.twig</code></li>
-    </ul>
-</div>
+            <div class="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for post in posts %}
+                    {% include 'Components/_card.html.twig' with {
+                        'entity': post,
+                        'entity_route': 'app_course_show'
+                    } %}
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-10">
+                {{ knp_pagination_render(posts) }}
+            </div>
+        </main>
+    </div>
 {% endblock %}
