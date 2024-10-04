@@ -27,7 +27,8 @@
                 {% for course in courses | slice(0,6) %}
                     {% include 'Components/_card.html.twig' with {
                         'entity': course,
-                        'entity_route': 'app_course_show'
+                        'entity_route': 'app_course_show',
+                        'is_external': false
                     } %}
                 {% endfor %}
             </div>
@@ -38,7 +39,8 @@
                 {% for post in posts | slice(0,6) %}
                     {% include 'Components/_card.html.twig' with {
                         'entity': post,
-                        'entity_route': 'app_post_admin_show'
+                        'entity_route': post.externalLink,
+                        'is_external': true
                     } %}
                 {% endfor %}
             </div>

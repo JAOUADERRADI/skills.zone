@@ -1,5 +1,6 @@
+{% set is_external = is_external|default(false) %}
 <a
-    href="{{ path(entity_route, { id: entity.id }) }}" class="bg-primary-light_white p-2 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
+    href="{% if is_external %}{{ entity_route }}{% else %}{{ path(entity_route, { id: entity.id }) }}{% endif %}" class="bg-primary-light_white p-2 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
     <!-- Image Section -->
     <img
     src="{{ asset('uploads/images/' ~ entity.image) }}" loading="lazy" alt="{{ entity.title }}" class="rounded-lg w-full max-h-[300px] object-cover">

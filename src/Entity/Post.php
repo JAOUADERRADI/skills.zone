@@ -19,7 +19,7 @@ class Post
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
+    private ?string $externalLink = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -66,14 +66,14 @@ class Post
         return $this;
     }
 
-    public function getContent(): ?string
+    public function  getExternalLink(): ?string
     {
-        return $this->content;
+        return $this->externalLink;
     }
 
-    public function setContent(string $content): static
+    public function setExternalLink(string $externalLink): static
     {
-        $this->content = $content;
+        $this->externalLink = $externalLink;
 
         return $this;
     }

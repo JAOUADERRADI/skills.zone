@@ -29,7 +29,8 @@
                 {% for post in posts %}
                     {% include 'Components/_card.html.twig' with {
                         'entity': post,
-                        'entity_route': 'app_course_show'
+                        'entity_route': post.externalLink,
+                        'is_external': true
                     } %}
                 {% endfor %}
             </div>
