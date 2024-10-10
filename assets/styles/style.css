@@ -278,6 +278,18 @@ img {
     display: block;
 }
 
+/* Carousel */
+
+#carousel {
+    display: flex;
+    height: 400px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    flex: 0 0 100%; /* Default 100% for mobile */
+}
+
 /* Responsive Design */
 
 /* Mobile adjustments: smaller padding and font size */
@@ -317,5 +329,12 @@ img {
 @media (min-width: var(--breakpoint-desktop)) {
     .form-wrapper {
         max-width: 800px;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .carousel-item {
+        flex: 0 0 calc(100% / 3); /* 3 items visible on desktop */
     }
 }

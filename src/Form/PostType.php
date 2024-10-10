@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,11 +33,18 @@ class PostType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('content', TextareaType::class, [
-                'label' => 'Content',
+            ->add('externalLink', UrlType::class, [
+                'label' => 'External Link',
                 'constraints' => [
                     new Assert\NotBlank([
-                        'message' => 'The content should not be blank.',
+                        'message' => 'The external link should not be blank.',
+                    ]),
+                    new Assert\Url([
+                        'message' => 'Please enter a valid URL.',
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^https?:\/\//',
+                        'message' => 'The URL must start with "http://" or "https://".',
                     ]),
                 ],
             ])

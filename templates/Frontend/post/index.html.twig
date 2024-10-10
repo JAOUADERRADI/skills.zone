@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
-{% block title %}
-    All Courses | SkillsZone
-{% endblock %}
+
+{% block title %}Hello PostController!{% endblock %}
 
 {% block body %}
     <div class="flex max-w-8xl mx-auto">
@@ -23,21 +22,22 @@
             </section>
 
             <h2 id="courses" class="mt-10 mb-10 text-2xl sm:text-4xl font-bold">
-                All Courses
+                All postes
             </h2>
 
             <div class="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-                {% for course in courses %}
+                {% for post in posts %}
                     {% include 'Components/_card.html.twig' with {
-                        'entity': course,
-                        'entity_route': 'app_course_show'
+                        'entity': post,
+                        'entity_route': post.externalLink,
+                        'is_external': true
                     } %}
                 {% endfor %}
             </div>
 
             <!-- Pagination -->
-            <div class="mt-10 w-full">
-                {{ knp_pagination_render(courses) }}
+            <div class="mt-10">
+                {{ knp_pagination_render(posts) }}
             </div>
         </main>
     </div>

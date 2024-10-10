@@ -1,7 +1,7 @@
 {% extends 'Admin/base.html.twig' %}
-
-{% block title %}Post Details{% endblock %}
-
+{% block title %}
+    Post Details
+{% endblock %}
 {% block body %}
     <div class="max-w-6xl mx-auto mt-24 p-6 bg-primary-light_white rounded-lg shadow-lg text-primary-dark">
         <h1 class="text-4xl font-bold mb-8 text-center">
@@ -11,36 +11,70 @@
             <table class="min-w-full table-auto bg-primary-white shadow-md rounded-lg">
                 <tbody>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Id</th>
-                        <td class="p-4">{{ post.id }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            Id
+                        </th>
+                        <td class="p-4">
+                            {{ post.id }}
+                        </td>
                     </tr>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Title</th>
-                        <td class="p-4">{{ post.title }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            Title
+                        </th>
+                        <td class="p-4">
+                            {{ post.title }}
+                        </td>
                     </tr>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Content</th>
-                        <td class="p-4">{{ post.content }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            External Link
+                        </th>
+                        <td class="p-4">
+                            <a href="{{ post.externalLink }}" target="_blank" class="text-primary-blue hover:underline">
+                                {{ post.externalLink }}
+                            </a>
+                        </td>
                     </tr>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Description</th>
-                        <td class="p-4">{{ post.description }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            Description
+                        </th>
+                        <td class="p-4">
+                            {{ post.description }}
+                        </td>
                     </tr>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Image</th>
-                        <td class="p-4">{{ post.image }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            Image
+                        </th>
+                        <td class="p-4">
+                            {{ post.image }}
+                        </td>
                     </tr>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">CreatedAt</th>
-                        <td class="p-4">{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            CreatedAt
+                        </th>
+                        <td class="p-4">
+                            {{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}
+                        </td>
                     </tr>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">UpdatedAt</th>
-                        <td class="p-4">{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            UpdatedAt
+                        </th>
+                        <td class="p-4">
+                            {{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}
+                        </td>
                     </tr>
                     <tr class="border-b">
-                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">Status</th>
-                        <td class="p-4">{{ post.status.value }}</td>
+                        <th class="p-4 text-left text-primary-dark_blue bg-primary-light_white">
+                            Status
+                        </th>
+                        <td class="p-4">
+                            {{ post.status.value }}
+                        </td>
                     </tr>
                 </tbody>
             </table>

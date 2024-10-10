@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 #[Route('admin/resource-category')]
@@ -18,10 +20,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 final class PostCategoryController extends AbstractController
 {
     #[Route(name: 'app_post_category_index', methods: ['GET'])]
-    public function index(PostCategoryRepository $postCategoryRepository): Response
+    public function index(PostCategoryRepository $postCategoryRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $postCategoryRepository->createQueryBuilder('cc')->getQuery();
+        $postCategory = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('Admin/post_category/index.html.twig', [
-            'post_categories' => $postCategoryRepository->findAll(),
+            'post_categories' => $postCategory,
         ]);
     }
 

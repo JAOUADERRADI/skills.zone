@@ -27,14 +27,14 @@
                         Description
                     </th>
                     {# <th class="p-4">
-                        Image
-                    </th> #}
+                                            Image
+                                        </th> #}
                     <th class="p-4">
                         CreatedAt
                     </th>
                     {# <th class="p-4">
-                        UpdatedAt
-                    </th> #}
+                                            UpdatedAt
+                                        </th> #}
                     <th class="p-4">
                         Actions
                     </th>
@@ -54,14 +54,14 @@
                             {{ course.description }}
                         </td>
                         {# <td class="p-4">
-                            {{ course.image ? course.image : 'No image' }}
-                        </td> #}
+                                                    {{ course.image ? course.image : 'No image' }}
+                                                </td> #}
                         <td class="p-4">
                             {{ course.createdAt ? course.createdAt|date('Y-m-d H:i:s') : '' }}
                         </td>
                         {# <td class="p-4">
-                            {{ course.updatedAt ? course.updatedAt|date('Y-m-d H:i:s') : '' }}
-                        </td> #}
+                                                    {{ course.updatedAt ? course.updatedAt|date('Y-m-d H:i:s') : '' }}
+                                                </td> #}
                         <td class="p-4 flex space-x-4">
                             <a href="{{ path('app_course_show', {'id': course.id}) }}" class="text-secondary-orange hover:text-orange-400">
                                 Show
@@ -81,5 +81,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <!-- Pagination -->
+        <div class="mt-10 w-full">
+            {{ knp_pagination_render(courses) }}
+        </div>
     </div>
 {% endblock %}
