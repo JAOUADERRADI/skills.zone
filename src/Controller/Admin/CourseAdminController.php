@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 #[Route('admin/course')]
@@ -20,10 +22,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class CourseAdminController extends AbstractController
 {
     #[Route(name: 'app_course_index', methods: ['GET'])]
-    public function index(CourseRepository $courseRepository): Response
+    public function index(CourseRepository $courseRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $coursesQuery = $courseRepository->findAll();
+        $courses = $paginator->paginate(
+            $coursesQuery,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('Admin/course/index.html.twig', [
-            'courses' => $courseRepository->findAll(),
+            'courses' => $courses,
         ]);
     }
 

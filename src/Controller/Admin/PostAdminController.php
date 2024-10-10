@@ -13,6 +13,8 @@ use Symfony\Component\Routing\Attribute\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 #[Route('/admin/resource')]
@@ -20,10 +22,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class PostAdminController extends AbstractController
 {
     #[Route(name: 'app_post_admin_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository): Response
+    public function index(PostRepository $postRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $postsQuery = $postRepository->findAll();
+        $posts = $paginator->paginate(
+            $postsQuery,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('Admin/post_admin/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $posts,
         ]);
     }
 
