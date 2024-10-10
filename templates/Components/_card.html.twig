@@ -1,5 +1,5 @@
 {% set is_external = is_external|default(false) %}
-<div class="carousel-item w-[200px] h-[380px] p-5">
+<div class="p-5">
     <a
         href="{% if is_external %}{{ entity_route }}{% else %}{{ path(entity_route, { id: entity.id }) }}{% endif %}" class="h-full flex flex-col bg-primary-light_white rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl overflow-hidden" aria-label="View details of {{ entity.title }}">
         <!-- Image Section -->
