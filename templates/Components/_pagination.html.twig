@@ -1,0 +1,41 @@
+{% if pageCount > 1 %}
+    <nav class="flex justify-center mt-6">
+        <ul class="inline-flex items-center space-x-2">
+            {% if first is defined and current != first %}
+                <li>
+                    <a href="{{ path(route, query|merge({(pageParameterName): first})) }}" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-200">&lt;&lt;</a>
+                </li>
+            {% endif %}
+
+            {% if previous is defined %}
+                <li>
+                    <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-200">&lt;</a>
+                </li>
+            {% endif %}
+
+            {% for page in pagesInRange %}
+                {% if page != current %}
+                    <li>
+                        <a href="{{ path(route, query|merge({(pageParameterName): page})) }}" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-200">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <span class="px-3 py-2 bg-primary-blue text-white rounded">{{ page }}</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if next is defined %}
+                <li>
+                    <a href="{{ path(route, query|merge({(pageParameterName): next})) }}" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-200">&gt;</a>
+                </li>
+            {% endif %}
+
+            {% if last is defined and current != last %}
+                <li>
+                    <a href="{{ path(route, query|merge({(pageParameterName): last})) }}" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-200">&gt;&gt;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

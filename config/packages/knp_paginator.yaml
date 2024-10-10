@@ -6,4 +6,4 @@ knp_paginator:
         sort_direction_name: direction
         distinct: true
     template:
-        # pagination: 'KnpPaginator/Pagination/tailwindcss_pagination.html.twig'
+        pagination: 'Components/_pagination.html.twig'
