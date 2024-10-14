@@ -64,6 +64,20 @@ security:
         - { path: ^/admin/resource/category/edit, roles: ROLE_ADMIN }
         - { path: ^/admin/resource/category/delete, roles: ROLE_ADMIN }
 
+        # Access control for InfoUser administration
+        - { path: ^/admin/info-user/new, roles: ROLE_ADMIN }
+        - { path: ^/admin/info-user/edit, roles: ROLE_ADMIN }
+        - { path: ^/admin/info-user/delete, roles: ROLE_ADMIN }
+        - { path: ^/admin/info-user/show, roles: ROLE_ADMIN }
+        - { path: ^/admin/info-user, roles: ROLE_ADMIN }
+
+        # Access control for InfoUser frontend (user profile)
+        - { path: ^/profile/new, roles: ROLE_USER }
+        - { path: ^/profile/edit, roles: ROLE_USER }
+        - { path: ^/profile/delete, roles: ROLE_USER }
+        - { path: ^/profile/show, roles: ROLE_USER }
+        - { path: ^/profile, roles: ROLE_USER }
+
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
