@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Form\SearchCourseType;
+use App\Entity\CourseCategory;
 
 
 class CourseController extends AbstractController
@@ -20,15 +22,45 @@ class CourseController extends AbstractController
     #[Route('/course', name: 'app_course')]
     public function index(EntityManagerInterface $entityManager, PaginatorInterface $paginator, Request $request): Response
     {
-        $coursesQuery = $entityManager->getRepository(Course::class)->createQueryBuilder('c')->getQuery();
+        // Create the form for searching courses
+        $form = $this->createForm(SearchCourseType::class);
+        $form->handleRequest($request);
 
+        // Initialize the query builder to retrieve all courses
+        $queryBuilder = $entityManager->getRepository(Course::class)->createQueryBuilder('c');
+
+        // If the form is submitted and valid, apply the filters
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData(); // Get the form data
+
+            // Filter by keyword
+            if ($data['keyword']) {
+                $queryBuilder->andWhere('c.title LIKE :keyword')
+                                ->setParameter('keyword', '%' . $data['keyword'] . '%');
+            }
+
+            // Filter by category if selected
+            if ($data['category']) {
+                $queryBuilder->andWhere('c.category = :category')
+                    ->setParameter('category', $data['category']);
+            }
+        }
+
+        // Get the query from the query builder
+        $coursesQuery = $queryBuilder->getQuery();
+
+        // Paginate the results (9 courses per page)
         $courses = $paginator->paginate(
             $coursesQuery,
             $request->query->getInt('page', 1),
             9
         );
+
+
+        // Render the template and pass the courses and the search form to the view
         return $this->render('Frontend/course/index.html.twig', [
             'courses' => $courses,
+            'form' => $form->createView(),
         ]);
     }
 

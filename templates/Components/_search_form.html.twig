@@ -1,0 +1,32 @@
+{{ form_start(form, {'attr': {'class': 'flex flex-col md:flex-row items-center md:items-end space-y-4 md:space-y-0 md:space-x-4'}}) }}
+
+    <!-- Keyword Search Field -->
+    <div class="flex-1 w-full">
+        {{ form_label(form.keyword, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
+        {{ form_widget(form.keyword, {'attr': {'class': 'block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-blue focus:border-primary-blue sm:text-sm'}}) }}
+        {% if form_errors(form.keyword) %}
+            <div class="text-red-500 text-sm mt-1">
+                {{ form_errors(form.keyword) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Category Filter Field -->
+    <div class="flex-1 w-full">
+        {{ form_label(form.category, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700 mb-2'}}) }}
+        {{ form_widget(form.category, {'attr': {'class': 'block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-primary-blue focus:border-primary-blue sm:text-sm'}}) }}
+        {% if form_errors(form.category) %}
+            <div class="text-red-500 text-sm mt-1">
+                {{ form_errors(form.category) }}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Search Button -->
+    <div class="w-full md:w-auto">
+        <button type="submit" class="button button--primary">
+            Search
+        </button>
+    </div>
+
+{{ form_end(form) }}
