@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello PostController!{% endblock %}
-
+{% block title %}
+    Hello PostController!
+{% endblock %}
 {% block body %}
     <div class="flex max-w-8xl mx-auto">
         <main class="w-full p-6">
@@ -20,11 +20,12 @@
                     </div>
                 </div>
             </section>
-
+            <!-- search form -->
+            {% include 'Components/_search_form.html.twig' with {'form': form, 'label_keyword': 'resource name'} %}
+            <!-- end search form -->
             <h2 id="courses" class="mt-10 mb-10 text-2xl sm:text-4xl font-bold">
                 All postes
             </h2>
-
             <div class="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
                 {% for post in posts %}
                     {% include 'Components/_card.html.twig' with {
@@ -34,7 +35,6 @@
                     } %}
                 {% endfor %}
             </div>
-
             <!-- Pagination -->
             <div class="mt-10">
                 {{ knp_pagination_render(posts) }}
