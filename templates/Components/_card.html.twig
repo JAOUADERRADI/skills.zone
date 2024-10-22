@@ -8,7 +8,7 @@
             src="{{ asset('uploads/images/' ~ entity.image) }}" loading="lazy" alt="{{ entity.title }}" class="rounded-lg w-full h-[200px] object-cover">
             <!-- Category -->
             {% if entity.category %}
-                <span class="absolute top-2 left-2 bg-primary-blue text-white text-xs px-2 py-1 rounded-l shadow-md">
+                <span class="absolute top-2 left-2 bg-primary-blue text-white text-xs px-2 py-1 shadow-md" style="border-radius: 0.25rem;">
                     {{ entity.category.name }}
                 </span>
             {% endif %}
