@@ -3,7 +3,7 @@
     --primary-blue: #1A8FE3;
     --primary-dark: #0F1114;
     --primary-white: #FFFFFF;
-    --primary-light-white:#F2F2F2;
+    --primary-light-white: #F2F2F2;
 
     /* Secondary Colors */
     --secondary-orange: #F37933;
@@ -19,7 +19,8 @@
 /* Reset CSS */
 
 html {
-    line-height: 1.15; /* Set the default line height for all text within the html element */
+    line-height: 1.15;
+    /* Set the default line height for all text within the html element */
 }
 
 body {
@@ -28,25 +29,29 @@ body {
     padding: 0;
     color: var(--primary-dark);
     /* font-family: ; /* Global font-family */
-    box-sizing: border-box; /* Set a global box-sizing to include padding and borders in the element's total width and height */
+    box-sizing: border-box;
+    /* Set a global box-sizing to include padding and borders in the element's total width and height */
 }
 
 a {
-    text-decoration: none; /* Remove underline from all anchor tags */
+    text-decoration: none;
+    /* Remove underline from all anchor tags */
 }
 
 button,
 input,
 select,
 textarea {
-    font-family: inherit; /* Inherit font-family from parent element */
+    font-family: inherit;
+    /* Inherit font-family from parent element */
     /* Set font size to 100% of the default size and maintain the line height */
     font-size: 100%;
     line-height: 1.15;
 }
 
 img {
-    border-style: none; /* Remove the default border from all images */
+    border-style: none;
+    /* Remove the default border from all images */
 }
 
 /* Form Styles */
@@ -74,7 +79,8 @@ img {
 .form-wrapper__title {
     font-size: 2rem;
     text-align: center;
-    margin-bottom: 1.5rem; /* Space below the title */
+    margin-bottom: 1.5rem;
+    /* Space below the title */
 }
 
 /* .form-wrapper__error {
@@ -160,7 +166,8 @@ img {
 }
 
 .form-group__checkbox {
-    color: var(--primary-dark-blue) !important; /* Définit la couleur du texte du champ checkbox */
+    color: var(--primary-dark-blue) !important;
+    /* Définit la couleur du texte du champ checkbox */
 }
 
 .form-group__error {
@@ -273,6 +280,55 @@ img {
     color: var(--primary-blue);
 }
 
+/* Base styling for the menu bars */
+
+#menu-icon {
+    width: 30px; /* Total width of the bars */
+    height: 24px; /* Total height of the container */
+    position: relative;
+}
+
+/* Styling for each individual bar */
+.bar {
+    display: block;
+    width: 100%;
+    height: 4px;  /* Height of each bar */
+    background-color: var(--primary-blue); /* Use the primary blue color */
+    position: absolute;
+    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; /* Smooth animation for transform and opacity */
+}
+
+/* Positioning of the bars */
+.top-bar {
+    top: 0;
+}
+
+.middle-bar {
+    top: 50%;
+    transform: translateY(-50%); /* Center the middle bar perfectly */
+}
+
+.bottom-bar {
+    bottom: 0;
+}
+
+/* Animation styles applied on click (when .menu-open is active) */
+
+/* Move the top bar down and rotate it to form part of the 'X' */
+.menu-open .top-bar {
+    transform: translateY(10px) rotate(45deg);
+}
+
+/* Fade out the middle bar */
+.menu-open .middle-bar {
+    opacity: 0;
+}
+
+ /* Move the bottom bar up and rotate it to form the other part of the 'X' */
+.menu-open .bottom-bar {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
 /* Display mobile navigation when active */
 .mobile-nav--active {
     display: block;
@@ -287,7 +343,8 @@ img {
 }
 
 .carousel-item {
-    flex: 0 0 100%; /* Default 100% for mobile */
+    flex: 0 0 100%;
+    /* Default 100% for mobile */
 }
 
 /* Responsive Design */
@@ -335,6 +392,7 @@ img {
 
 @media (min-width: 768px) {
     .carousel-item {
-        flex: 0 0 calc(100% / 3); /* 3 items visible on desktop */
+        flex: 0 0 calc(100% / 3);
+        /* 3 items visible on desktop */
     }
 }
