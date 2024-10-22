@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   mobileMenuButton.addEventListener("click", function () {
     mobileNav.classList.toggle("mobile-nav--active");
     menuIcon.classList.toggle("menu-open");
+
+    document.body.classList.toggle("no-scroll");
   });
 
   const profileButton = document.getElementById("profile-menu-button");
