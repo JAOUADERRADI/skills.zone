@@ -3,6 +3,7 @@
 namespace App\Controller\Frontend;
 
 use App\Entity\InfoUser;
+use App\Entity\User;
 use App\Form\InfoUserType;
 use App\Repository\InfoUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
