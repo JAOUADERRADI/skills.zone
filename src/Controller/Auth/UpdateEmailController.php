@@ -10,10 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UpdateEmailController extends AbstractController
 {
     #[Route('profile/update-email', name: 'app_user_update_email', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function updateEmail(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $user = $security->getUser();

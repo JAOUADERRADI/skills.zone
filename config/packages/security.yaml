@@ -78,6 +78,7 @@ security:
         - { path: ^/profile/show, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^profile/update-email, roles: ROLE_USER }
+        - { path: ^profile/change-password, roles: ROLE_USER }
 
         # - { path: ^/profile, roles: ROLE_USER }
 

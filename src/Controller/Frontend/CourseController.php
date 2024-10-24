@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Form\SearchCourseType;
 use App\Entity\CourseCategory;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class CourseController extends AbstractController
@@ -84,6 +85,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/course/enroll/{id}', name: 'app_course_enroll', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function enroll(Course $course, EntityManagerInterface $entityManager, Request $request): RedirectResponse
     {
         $user = $this->getUser();
@@ -113,6 +115,7 @@ class CourseController extends AbstractController
     }
 
     #[Route('/my-courses', name: 'user_courses')]
+    #[IsGranted('ROLE_USER')]
     public function myCourses(EntityManagerInterface $entityManager, Request $request): Response
     {
         $user = $this->getUser();
