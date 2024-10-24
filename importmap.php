@@ -25,4 +25,8 @@ return [
     '@hotwired/turbo' => [
         'version' => '7.3.0',
     ],
+    'scriptJs' => [
+        'path' => './assets/js/script.js',
+        'entrypoint' => true,
+    ],
 ];
