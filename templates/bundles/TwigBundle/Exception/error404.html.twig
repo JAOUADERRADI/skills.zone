@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Not Found{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-center h-[500px]">
+        <div>
+            <p class="text-6xl font-bold text-primary-dark mb-6">Ooops...</p>
+            <h1 class="text-2xl text-secondary-dark mb-4">404 - Page not found.</h1>
+            <p class="mb-4 mt-4">This Page doesn't exist or was removed! We suggest you back to home.</p>
+            <a href="{{ path('app_home') }}" class="button button--primary mt-10">
+                Go back to Homepage
+            </a>
+        </div>
+        <div class="w-96">
+            <img src="{{ asset('uploads/images/icons/404.svg') }}" alt="" >
+        </div>
+    </div>
+{% endblock %}
