@@ -3,17 +3,17 @@
 {% block title %}Server Error{% endblock %}
 
 {% block body %}
-    <div class="flex items-center justify-center h-[500px]">
-        <div>
-            <h1 class="text-6xl font-bold text-primary-dark mb-6">500</h1>
-            <p class="text-2xl text-secondary-dark mb-4">Oops! Something went wrong on our end.</p>
-            <p class="mb-4 mt-4">You need to log in to access this page.</p>
+    <div class="flex flex-col lg:flex-row items-center justify-center h-[500px] px-4 md:px-0">
+        <div class="text-center lg:text-left lg:mr-8">
+            <h1 class="text-4xl md:text-6xl font-bold text-primary-dark mb-6">500</h1>
+            <p class="text-xl md:text-2xl text-secondary-dark mb-4">Oops! Something went wrong on our end.</p>
+            <p class="text-sm md:text-base mb-4 mt-4">You need to log in to access this page.</p>
             <a href="{{ path('app_home') }}" class="button button--primary mt-10">
                 Go to Home page
             </a>
         </div>
-        <div class="w-96">
-            <img src="{{ asset('uploads/images/icons/500.svg') }}" alt="Access Denied" >
+        <div class="w-64 md:w-80 lg:w-96 mt-6 lg:mt-0">
+            <img src="{{ asset('uploads/images/icons/500.svg') }}" alt="Access Denied" class="w-full h-auto">
         </div>
     </div>
 {% endblock %}
